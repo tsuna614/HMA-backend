@@ -2,11 +2,28 @@ const { log } = require("console");
 const User = require("../models/user.model");
 const path = require("path");
 const fs = require("fs");
+const { prependToFile } = require("../utils/test");
 
 const userController = {
   getAllUsers: async (req, res, next) => {
+    const start = process.hrtime();
     try {
       const users = await User.find({});
+
+      // End the timer
+      const end = process.hrtime(start);
+
+      // Calculate the time taken in milliseconds
+      const timeInMs = end[0] * 1000 + end[1] / 1000000;
+
+      const filePath = path.join(__dirname, "..", "utils", "logs.txt");
+      const timeTaken = `Get all users data successfully in ${timeInMs.toFixed(
+        3
+      )} ms`;
+
+      // Write the time taken to a file
+      await prependToFile(filePath, timeTaken);
+
       res.status(200).json(users);
     } catch (err) {
       console.log(err);
