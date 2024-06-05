@@ -1,1 +1,3 @@
-Get all users data successfully in 73.222 ms
+Get all users data successfully in 73.442 ms
+Get all users data successfully in 76.228 ms
+Get all users data successfully in 80.443 ms

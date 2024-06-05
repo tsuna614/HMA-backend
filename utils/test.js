@@ -11,7 +11,7 @@ async function prependToFile(filePath, content) {
       }
     }
     const newContent =
-      existingContent == undefined ? content : content + existingContent;
+      existingContent == undefined ? content : content + "\n" + existingContent;
     await fs.writeFile(filePath, newContent, "utf-8");
     console.log("Content prepended successfully!");
   } catch (err) {
