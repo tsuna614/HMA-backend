@@ -7,6 +7,7 @@ require("dotenv").config();
 
 const userRoute = require("./routes/user.route");
 const authRoute = require("./routes/auth.route");
+const loggingMiddleware = require("./middlewares/logging.middleware");
 
 mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection;
@@ -24,6 +25,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
+
+app.use(loggingMiddleware);
 
 app.use("/v1/user", userRoute);
 app.use("/v1/auth", authRoute);
